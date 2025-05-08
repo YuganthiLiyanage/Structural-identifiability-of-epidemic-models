@@ -1,0 +1,98 @@
+julia> using StructuralIdentifiability
+
+julia> ode = @ODEmodel(
+              S'(t) =  -(betaA*A(t) + betaI*I(t))*S(t)/n,
+              E'(t) = (betaA*A(t) + betaI*I(t))*S(t)/n- k*E(t),
+              I'(t) =  k*rho1*E(t) - gamma*I(t),
+              A'(t) = k*(1-rho1)*E(t) - gamma*A(t),
+              R'(t) = gamma*I(t) + gamma*A(t),
+              y1(t) = k*rho1*E(t)
+              )
+
+[ Info: Summary of the model:
+[ Info: State variables: S, E, I, A, R
+[ Info: Parameters: betaA, betaI, gamma, k, n, rho1
+[ Info: Inputs:
+[ Info: Outputs: y1
+S'(t) = (-S(t)*I(t)*betaI - S(t)*A(t)*betaA)//n
+E'(t) = (S(t)*I(t)*betaI + S(t)*A(t)*betaA - E(t)*k*n)//n
+I'(t) = E(t)*k*rho1 - I(t)*gamma
+A'(t) = -E(t)*k*rho1 + E(t)*k - A(t)*gamma
+R'(t) = I(t)*gamma + A(t)*gamma
+y1(t) = E(t)*k*rho1
+
+
+julia>  assess_identifiability(ode)
+  S(t)  => :nonidentifiable
+  E(t)  => :nonidentifiable
+  I(t)  => :nonidentifiable
+  A(t)  => :nonidentifiable
+  R(t)  => :nonidentifiable
+  betaA => :nonidentifiable
+  betaI => :nonidentifiable
+  gamma => :globally
+  k     => :globally
+  n     => :nonidentifiable
+  rho1  => :nonidentifiable
+
+julia> find_identifiable_functions(ode)
+ k
+ gamma
+ (n*rho1)//(betaA*rho1 - betaA - betaI*rho1)
+
+julia> ioeqs = find_ioequations(ode)
+Dict{Nemo.QQMPolyRingElem, Nemo.QQMPolyRingElem} with 1 entry:
+  y1(t)_3 => -4*betaA^2*k^3*rho1^2*y1(t)_0^6 + 8*betaA^2*k^3*rho1*y1(t)_0^6 - 4*betaA^2*k^3*y1(t)_0^6 - 12*betaA^2*k^2*rho1^2*y1(t)_0^5*y1(t)_1 + 24*betaA^…
+julia> collect(values(ioeqs))
+1-element Vector{Nemo.QQMPolyRingElem}:
+ -4*betaA^2*k^3*rho1^2*y1(t)_0^6 + 8*betaA^2*k^3*rho1*y1(t)_0^6 - 4*betaA^2*k^3*y1(t)_0^6 - 12*betaA^2*k^2*rho1^2*y1(t)_0^5*y1(t)_1 + 24*betaA^2*k^2*rho1*y1(t)_0^5*y1(t)_1 - 12*betaA^2*k^2*y1(t)_0^5*y1(t)_1 - 12*betaA^2*k*rho1^2*y1(t)_0^4*y1(t)_1^2 + 24*betaA^2*k*rho1*y1(t)_0^4*y1(t)_1^2 - 12*betaA^2*k*y1(t)_0^4*y1(t)_1^2 - 4*betaA^2*rho1^2*y1(t)_0^3*y1(t)_1^3 + 8*betaA^2*rho1*y1(t)_0^3*y1(t)_1^3 - 4*betaA^2*y1(t)_0^3*y1(t)_1^3 + 8*betaA*betaI*k^3*rho1^2*y1(t)_0^6 - 8*betaA*betaI*k^3*rho1*y1(t)_0^6 + 24*betaA*betaI*k^2*rho1^2*y1(t)_0^5*y1(t)_1 - 24*betaA*betaI*k^2*rho1*y1(t)_0^5*y1(t)_1 + 24*betaA*betaI*k*rho1^2*y1(t)_0^4*y1(t)_1^2 - 24*betaA*betaI*k*rho1*y1(t)_0^4*y1(t)_1^2 + 8*betaA*betaI*rho1^2*y1(t)_0^3*y1(t)_1^3 - 8*betaA*betaI*rho1*y1(t)_0^3*y1(t)_1^3 + betaA*gamma^2*k^3*n*rho1^2*y1(t)_0^5 - betaA*gamma^2*k^3*n*rho1*y1(t)_0^5 + 3*betaA*gamma^2*k^2*n*rho1^2*y1(t)_0^4*y1(t)_1 - 3*betaA*gamma^2*k^2*n*rho1*y1(t)_0^4*y1(t)_1 + 3*betaA*gamma^2*k*n*rho1^2*y1(t)_0^3*y1(t)_1^2 - 3*betaA*gamma^2*k*n*rho1*y1(t)_0^3*y1(t)_1^2 + betaA*gamma^2*n*rho1^2*y1(t)_0^2*y1(t)_1^3 - betaA*gamma^2*n*rho1*y1(t)_0^2*y1(t)_1^3 + 2*betaA*gamma*k^3*n*rho1^2*y1(t)_0^4*y1(t)_1 - 2*betaA*gamma*k^3*n*rho1*y1(t)_0^4*y1(t)_1 + 6*betaA*gamma*k^2*n*rho1^2*y1(t)_0^4*y1(t)_2 - 6*betaA*gamma*k^2*n*rho1*y1(t)_0^4*y1(t)_2 + 12*betaA*gamma*k*n*rho1^2*y1(t)_0^3*y1(t)_1*y1(t)_2 - 6*betaA*gamma*k*n*rho1^2*y1(t)_0^2*y1(t)_1^3 - 12*betaA*gamma*k*n*rho1*y1(t)_0^3*y1(t)_1*y1(t)_2 + 6*betaA*gamma*k*n*rho1*y1(t)_0^2*y1(t)_1^3 + 6*betaA*gamma*n*rho1^2*y1(t)_0^2*y1(t)_1^2*y1(t)_2 - 4*betaA*gamma*n*rho1^2*y1(t)_0*y1(t)_1^4 - 6*betaA*gamma*n*rho1*y1(t)_0^2*y1(t)_1^2*y1(t)_2 + 4*betaA*gamma*n*rho1*y1(t)_0*y1(t)_1^4 + 4*betaA*k^3*n*rho1^2*y1(t)_0^4*y1(t)_2 - 4*betaA*k^3*n*rho1^2*y1(t)_0^3*y1(t)_1^2 - 4*betaA*k^3*n*rho1*y1(t)_0^4*y1(t)_2 + 4*betaA*k^3*n*rho1*y1(t)_0^3*y1(t)_1^2 + 4*betaA*k^2*n*rho1^2*y1(t)_0^4*y1(t)_3 + 2*betaA*k^2*n*rho1^2*y1(t)_0^3*y1(t)_1*y1(t)_2 - 6*betaA*k^2*n*rho1^2*y1(t)_0^2*y1(t)_1^3 - 4*betaA*k^2*n*rho1*y1(t)_0^4*y1(t)_3 - 2*betaA*k^2*n*rho1*y1(t)_0^3*y1(t)_1*y1(t)_2 + 6*betaA*k^2*n*rho1*y1(t)_0^2*y1(t)_1^3 + 8*betaA*k*n*rho1^2*y1(t)_0^3*y1(t)_1*y1(t)_3 - 3*betaA*k*n*rho1^2*y1(t)_0^3*y1(t)_2^2 - 2*betaA*k*n*rho1^2*y1(t)_0^2*y1(t)_1^2*y1(t)_2 - 3*betaA*k*n*rho1^2*y1(t)_0*y1(t)_1^4 - 8*betaA*k*n*rho1*y1(t)_0^3*y1(t)_1*y1(t)_3 + 3*betaA*k*n*rho1*y1(t)_0^3*y1(t)_2^2 + 2*betaA*k*n*rho1*y1(t)_0^2*y1(t)_1^2*y1(t)_2 + 3*betaA*k*n*rho1*y1(t)_0*y1(t)_1^4 + 4*betaA*n*rho1^2*y1(t)_0^2*y1(t)_1^2*y1(t)_3 - 3*betaA*n*rho1^2*y1(t)_0^2*y1(t)_1*y1(t)_2^2 - betaA*n*rho1^2*y1(t)_1^5 - 4*betaA*n*rho1*y1(t)_0^2*y1(t)_1^2*y1(t)_3 + 3*betaA*n*rho1*y1(t)_0^2*y1(t)_1*y1(t)_2^2 + betaA*n*rho1*y1(t)_1^5 - 4*betaI^2*k^3*rho1^2*y1(t)_0^6 - 12*betaI^2*k^2*rho1^2*y1(t)_0^5*y1(t)_1 - 12*betaI^2*k*rho1^2*y1(t)_0^4*y1(t)_1^2 - 4*betaI^2*rho1^2*y1(t)_0^3*y1(t)_1^3 - betaI*gamma^2*k^3*n*rho1^2*y1(t)_0^5 - 3*betaI*gamma^2*k^2*n*rho1^2*y1(t)_0^4*y1(t)_1 - 3*betaI*gamma^2*k*n*rho1^2*y1(t)_0^3*y1(t)_1^2 - betaI*gamma^2*n*rho1^2*y1(t)_0^2*y1(t)_1^3 - 2*betaI*gamma*k^3*n*rho1^2*y1(t)_0^4*y1(t)_1 - 6*betaI*gamma*k^2*n*rho1^2*y1(t)_0^4*y1(t)_2 - 12*betaI*gamma*k*n*rho1^2*y1(t)_0^3*y1(t)_1*y1(t)_2 + 6*betaI*gamma*k*n*rho1^2*y1(t)_0^2*y1(t)_1^3 - 6*betaI*gamma*n*rho1^2*y1(t)_0^2*y1(t)_1^2*y1(t)_2 + 4*betaI*gamma*n*rho1^2*y1(t)_0*y1(t)_1^4 - 4*betaI*k^3*n*rho1^2*y1(t)_0^4*y1(t)_2 + 4*betaI*k^3*n*rho1^2*y1(t)_0^3*y1(t)_1^2 - 4*betaI*k^2*n*rho1^2*y1(t)_0^4*y1(t)_3 - 2*betaI*k^2*n*rho1^2*y1(t)_0^3*y1(t)_1*y1(t)_2 + 6*betaI*k^2*n*rho1^2*y1(t)_0^2*y1(t)_1^3 - 8*betaI*k*n*rho1^2*y1(t)_0^3*y1(t)_1*y1(t)_3 + 3*betaI*k*n*rho1^2*y1(t)_0^3*y1(t)_2^2 + 2*betaI*k*n*rho1^2*y1(t)_0^2*y1(t)_1^2*y1(t)_2 + 3*betaI*k*n*rho1^2*y1(t)_0*y1(t)_1^4 - 4*betaI*n*rho1^2*y1(t)_0^2*y1(t)_1^2*y1(t)_3 + 3*betaI*n*rho1^2*y1(t)_0^2*y1(t)_1*y1(t)_2^2 + betaI*n*rho1^2*y1(t)_1^5 - gamma^3*k^2*n^2*rho1^2*y1(t)_0^3*y1(t)_2 + gamma^3*k^2*n^2*rho1^2*y1(t)_0^2*y1(t)_1^2 - 2*gamma^3*k*n^2*rho1^2*y1(t)_0^2*y1(t)_1*y1(t)_2 + 2*gamma^3*k*n^2*rho1^2*y1(t)_0*y1(t)_1^3 - gamma^3*n^2*rho1^2*y1(t)_0*y1(t)_1^2*y1(t)_2 + gamma^3*n^2*rho1^2*y1(t)_1^4 - gamma^2*k^3*n^2*rho1^2*y1(t)_0^3*y1(t)_2 + gamma^2*k^3*n^2*rho1^2*y1(t)_0^2*y1(t)_1^2 - gamma^2*k^2*n^2*rho1^2*y1(t)_0^3*y1(t)_3 - 2*gamma^2*k^2*n^2*rho1^2*y1(t)_0^2*y1(t)_1*y1(t)_2 + 3*gamma^2*k^2*n^2*rho1^2*y1(t)_0*y1(t)_1^3 - 2*gamma^2*k*n^2*rho1^2*y1(t)_0^2*y1(t)_1*y1(t)_3 - gamma^2*k*n^2*rho1^2*y1(t)_0^2*y1(t)_2^2 + gamma^2*k*n^2*rho1^2*y1(t)_0*y1(t)_1^2*y1(t)_2 + 2*gamma^2*k*n^2*rho1^2*y1(t)_1^4 - gamma^2*n^2*rho1^2*y1(t)_0*y1(t)_1^2*y1(t)_3 - gamma^2*n^2*rho1^2*y1(t)_0*y1(t)_1*y1(t)_2^2 + 2*gamma^2*n^2*rho1^2*y1(t)_1^3*y1(t)_2 - gamma*k^3*n^2*rho1^2*y1(t)_0^2*y1(t)_1*y1(t)_2 + gamma*k^3*n^2*rho1^2*y1(t)_0*y1(t)_1^3 - gamma*k^2*n^2*rho1^2*y1(t)_0^2*y1(t)_1*y1(t)_3 - 2*gamma*k^2*n^2*rho1^2*y1(t)_0^2*y1(t)_2^2 + 3*gamma*k^2*n^2*rho1^2*y1(t)_0*y1(t)_1^2*y1(t)_2 - 2*gamma*k*n^2*rho1^2*y1(t)_0^2*y1(t)_2*y1(t)_3 + gamma*k*n^2*rho1^2*y1(t)_0*y1(t)_1*y1(t)_2^2 + gamma*k*n^2*rho1^2*y1(t)_1^3*y1(t)_2 - 2*gamma*n^2*rho1^2*y1(t)_0*y1(t)_1*y1(t)_2*y1(t)_3 + gamma*n^2*rho1^2*y1(t)_0*y1(t)_2^3 + gamma*n^2*rho1^2*y1(t)_1^3*y1(t)_3 - k^3*n^2*rho1^2*y1(t)_0^2*y1(t)_2^2 + 2*k^3*n^2*rho1^2*y1(t)_0*y1(t)_1^2*y1(t)_2 - k^3*n^2*rho1^2*y1(t)_1^4 - 2*k^2*n^2*rho1^2*y1(t)_0^2*y1(t)_2*y1(t)_3 + 2*k^2*n^2*rho1^2*y1(t)_0*y1(t)_1^2*y1(t)_3 + 2*k^2*n^2*rho1^2*y1(t)_0*y1(t)_1*y1(t)_2^2 - 2*k^2*n^2*rho1^2*y1(t)_1^3*y1(t)_2 - k*n^2*rho1^2*y1(t)_0^2*y1(t)_3^2 + k*n^2*rho1^2*y1(t)_0*y1(t)_1*y1(t)_2*y1(t)_3 + k*n^2*rho1^2*y1(t)_0*y1(t)_2^3 + k*n^2*rho1^2*y1(t)_1^3*y1(t)_3 - 2*k*n^2*rho1^2*y1(t)_1^2*y1(t)_2^2 - n^2*rho1^2*y1(t)_0*y1(t)_1*y1(t)_3^2 + n^2*rho1^2*y1(t)_0*y1(t)_2^2*y1(t)_3 + n^2*rho1^2*y1(t)_1^2*y1(t)_2*y1(t)_3 - n^2*rho1^2*y1(t)_1*y1(t)_2^3
+
+julia> ode = @ODEmodel(
+              S'(t) =  -(betaA*A(t) + betaI*I(t))*S(t)/n,
+              E'(t) = (betaA*A(t) + betaI*I(t))*S(t)/n- k*E(t),
+              I'(t) =  k*rho1*E(t) - gamma*I(t),
+              A'(t) = k*(1-rho1)*E(t) - gamma*A(t),
+              R'(t) = gamma*I(t) + gamma*A(t),
+              y1(t) = k*rho1*E(t),
+              y2(t) = n
+              )
+
+[ Info: Summary of the model:
+[ Info: State variables: S, E, I, A, R
+[ Info: Parameters: betaA, betaI, gamma, k, n, rho1
+[ Info: Inputs:
+[ Info: Outputs: y1, y2
+S'(t) = (-S(t)*I(t)*betaI - S(t)*A(t)*betaA)//n
+E'(t) = (S(t)*I(t)*betaI + S(t)*A(t)*betaA - E(t)*k*n)//n
+I'(t) = E(t)*k*rho1 - I(t)*gamma
+A'(t) = -E(t)*k*rho1 + E(t)*k - A(t)*gamma
+R'(t) = I(t)*gamma + A(t)*gamma
+y1(t) = E(t)*k*rho1
+y2(t) = n
+
+
+julia>  assess_identifiability(ode)
+  S(t)  => :nonidentifiable
+  E(t)  => :nonidentifiable
+  I(t)  => :nonidentifiable
+  A(t)  => :nonidentifiable
+  R(t)  => :nonidentifiable
+  betaA => :nonidentifiable
+  betaI => :nonidentifiable
+  gamma => :globally
+  k     => :globally
+  n     => :globally
+  rho1  => :nonidentifiable
+
+julia> assess_identifiability(ode, known_ic = [S,E,I,A,R])
+  S(0)  => :globally
+  E(0)  => :globally
+  I(0)  => :globally
+  A(0)  => :globally
+  R(0)  => :globally
+  betaA => :globally
+  betaI => :globally
+  gamma => :globally
+  k     => :globally
+  n     => :globally
+  rho1  => :globally

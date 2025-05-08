@@ -1,0 +1,165 @@
+julia> using StructuralIdentifiability
+
+julia> ode = @ODEmodel(
+                     Sv'(t) =  lamdaupsilon - beta*Sv(t)*I(t)/n- muupsilon*Sv(t),
+                     Iv'(t) = beta*Sv(t)*I(t)/n - muupsilon*Iv(t),
+                     S'(t) =  -betaupsilon*Iv(t)*S(t)/n,
+                     I'(t) = betaupsilon*Iv(t)*S(t)/n - gamma*I(t),
+                     R'(t) = gamma*I(t),
+                     y1(t) = S(0)-S(t)
+                     )
+
+[ Info: Summary of the model:
+[ Info: State variables: Sv, Iv, S, I, R
+[ Info: Parameters: beta, betaupsilon, gamma, lamdaupsilon, muupsilon, n
+[ Info: Inputs:
+[ Info: Outputs: y1
+ERROR: Number of variables does not match number of values
+Stacktrace:
+ [1] error(s::String)
+   @ Base .\error.jl:35
+ [2] (::Nemo.QQMPolyRingElem)(vals::Int64)
+   @ Nemo C:\Users\yugan\.julia\packages\Nemo\VHAIi\src\flint\fmpq_mpoly.jl:745
+ [3] top-level scope
+   @ C:\Users\yugan\.julia\packages\StructuralIdentifiability\jdtPG\src\input_macro.jl:7
+
+julia> ode = @ODEmodel(
+                     Sv'(t) =  lamdaupsilon - beta*Sv(t)*I(t)/n- muupsilon*Sv(t),
+                     Iv'(t) = beta*Sv(t)*I(t)/n - muupsilon*Iv(t),
+                     S'(t) =  -betaupsilon*Iv(t)*S(t)/n,
+                     I'(t) = betaupsilon*Iv(t)*S(t)/n - gamma*I(t),
+                     R'(t) = gamma*I(t),
+                     y1(t) = c-S(t)
+                     )
+[ Info: Summary of the model:
+[ Info: State variables: Sv, Iv, S, I, R
+[ Info: Parameters: beta, betaupsilon, c, gamma, lamdaupsilon, muupsilon, n
+[ Info: Inputs:
+[ Info: Outputs: y1
+Sv'(t) = (-Sv(t)*I(t)*beta - Sv(t)*muupsilon*n + lamdaupsilon*n)//n
+Iv'(t) = (Sv(t)*I(t)*beta - Iv(t)*muupsilon*n)//n
+S'(t) = (-Iv(t)*S(t)*betaupsilon)//n
+I'(t) = (Iv(t)*S(t)*betaupsilon - I(t)*gamma*n)//n
+R'(t) = I(t)*gamma
+y1(t) = -S(t) + c
+
+
+julia> assess_identifiability(ode)
+[ Info: Assessing local identifiability
+[ Info: Assessing global identifiability
+[ Info: Note: the input model has nontrivial submodels. If the computation for the full model will be too heavy, you may want to try to first analyze one of the submodels. They can be produced using function `find_submodels`
+[ Info: Functions to check involve states
+[ Info: Computing IO-equations
+[ Info: Computed IO-equations in 0.4089977 seconds
+[ Info: Computing Wronskians
+[ Info: Computed Wronskians in 0.5393979 seconds
+[ Info: Dimensions of the Wronskians [386]
+[ Info: Ranks of the Wronskians computed in 0.0133242 seconds
+[ Info: Simplifying generating set. Simplification level: standard
+[ Info: Computing normal forms of degree 2 in 7 variables
+[ Info: Used 9 specializations in 0.0186582 seconds, found 3 relations
+[ Info: Computing 8 Groebner bases for degrees (3, 3) for block orderings
+[ Info: Computed Groebner bases in 0.1090103 seconds
+[ Info: Inclusion checked with probability 0.9955 in 0.0783724 seconds
+[ Info: Global identifiability assessed in 1.5510321 seconds
+OrderedCollections.OrderedDict{Any, Symbol} with 12 entries:
+  Sv(t)        => :nonidentifiable
+  Iv(t)        => :nonidentifiable
+  S(t)         => :globally
+  I(t)         => :globally
+  R(t)         => :nonidentifiable
+  beta         => :nonidentifiable
+  betaupsilon  => :nonidentifiable
+  c            => :globally
+  gamma        => :globally
+  lamdaupsilon => :nonidentifiable
+  muupsilon    => :globally
+  n            => :nonidentifiable
+
+julia> find_identifiable_functions(ode)
+[ Info: Computing IO-equations
+[ Info: Computed IO-equations in 0.0163462 seconds
+[ Info: Computing Wronskians
+[ Info: Computed Wronskians in 0.2429628 seconds
+[ Info: Dimensions of the Wronskians [386]
+[ Info: Ranks of the Wronskians computed in 0.0097359 seconds
+[ Info: Simplifying generating set. Simplification level: standard
+[ Info: Computing normal forms of degree 2 in 7 variables
+[ Info: Used 9 specializations in 0.0041616 seconds, found 3 relations
+[ Info: Computing 8 Groebner bases for degrees (3, 3) for block orderings
+[ Info: Computed Groebner bases in 0.1103974 seconds
+[ Info: Inclusion checked with probability 0.995 in 0.0258804 seconds
+[ Info: The search for identifiable functions concluded in 0.5216164 seconds
+5-element Vector{AbstractAlgebra.Generic.FracFieldElem{Nemo.QQMPolyRingElem}}:
+ muupsilon
+ gamma
+ c
+ n//beta
+ n//(betaupsilon*lamdaupsilon)
+
+julia> ode = @ODEmodel(
+                     Sv'(t) =  lamdaupsilon - beta*Sv(t)*I(t)/n- muupsilon*Sv(t),
+                     Iv'(t) = beta*Sv(t)*I(t)/n - muupsilon*Iv(t),
+                     S'(t) =  -betaupsilon*Iv(t)*S(t)/n,
+                     I'(t) = betaupsilon*Iv(t)*S(t)/n - gamma*I(t),
+                     R'(t) = gamma*I(t),
+                     y1(t) = c-S(t),
+                     y2(t) = n
+                     )
+[ Info: Summary of the model:
+[ Info: State variables: Sv, Iv, S, I, R
+[ Info: Parameters: beta, betaupsilon, c, gamma, lamdaupsilon, muupsilon, n
+[ Info: Inputs:
+[ Info: Outputs: y1, y2
+Sv'(t) = (-Sv(t)*I(t)*beta - Sv(t)*muupsilon*n + lamdaupsilon*n)//n
+Iv'(t) = (Sv(t)*I(t)*beta - Iv(t)*muupsilon*n)//n
+S'(t) = (-Iv(t)*S(t)*betaupsilon)//n
+I'(t) = (Iv(t)*S(t)*betaupsilon - I(t)*gamma*n)//n
+R'(t) = I(t)*gamma
+y1(t) = -S(t) + c
+y2(t) = n
+
+
+julia> assess_identifiability(ode, known_ic = [Sv,Iv,S,I,R])
+[ Info: Computing IO-equations
+[ Info: Computed IO-equations in 0.9212519 seconds
+[ Info: Computing Wronskians
+[ Info: Computed Wronskians in 0.2419111 seconds
+[ Info: Dimensions of the Wronskians [2, 386]
+[ Info: Ranks of the Wronskians computed in 0.0094276 seconds
+[ Info: Simplifying generating set. Simplification level: standard
+[ Info: Computing normal forms of degree 2 in 7 variables
+[ Info: Used 7 specializations in 0.0029407 seconds, found 6 relations
+[ Info: Computing 8 Groebner bases for degrees (3, 3) for block orderings
+[ Info: Computed Groebner bases in 0.0926974 seconds
+[ Info: Inclusion checked with probability 0.99875 in 0.0596704 seconds
+[ Info: Simplifying generating set. Simplification level: standard
+[ Info: Computing normal forms of degree 2 in 12 variables
+[ Info: Used 25 specializations in 0.0871873 seconds, found 10 relations
+[ Info: Computing 13 Groebner bases for degrees (3, 3) for block orderings
+[ Info: Computed Groebner bases in 0.2622102 seconds
+[ Info: Inclusion checked with probability 0.99875 in 0.0012606 seconds
+[ Info: The search for identifiable functions concluded in 2.0639939 seconds
+[ Info: Simplifying generating set. Simplification level: standard
+[ Info: Computing normal forms of degree 2 in 14 variables
+[ Info: Used 13 specializations in 0.0574634 seconds, found 12 relations
+[ Info: Computing 15 Groebner bases for degrees (3, 3) for block orderings
+[ Info: Computed Groebner bases in 0.1974483 seconds
+[ Info: Inclusion checked with probability 0.9975 in 0.000961 seconds
+[ Info: The search for identifiable functions with known initial conditions concluded in 2.6076622 seconds
+[ Info: Assessing identifiability with known initial conditions concluded in 2.9694905 seconds
+OrderedCollections.OrderedDict{Nemo.QQMPolyRingElem, Symbol} with 12 entries:
+  Sv(0)        => :globally
+  Iv(0)        => :globally
+  S(0)         => :globally
+  I(0)         => :globally
+  R(0)         => :globally
+  beta         => :globally
+  betaupsilon  => :globally
+  c            => :globally
+  gamma        => :globally
+  lamdaupsilon => :globally
+  muupsilon    => :globally
+  n            => :globally
+
+julia>
