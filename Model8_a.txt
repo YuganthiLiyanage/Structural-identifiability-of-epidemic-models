@@ -1,0 +1,85 @@
+
+julia> using StructuralIdentifiability
+
+
+julia> ode3= @ODEmodel(
+                            E'(t) = (beta_p*Ii(t)+beta_I*I(t))*( C1 - (E + Ii + (k_p +gamma_p)*int_y/k_p))/( C-D(t)),
+                            Ii'(t) = k*E(t)-k_p*Ii(t)-gamma_p*Ii(t),
+                            I'(t) =  k_p*Ii(t) - gamma*I(t)-delta*I(t),
+                            D'(t) = delta*I(t),
+                            int_y'(t) = k_p*Ii(t),
+                            y(t) = k_p*Ii(t),
+                            y2(t) = int_y(t)
+                            )
+
+[ Info: Summary of the model:
+[ Info: State variables: E, Ii, I, D, int_y
+[ Info: Parameters: C, C1, beta_I, beta_p, delta, gamma, gamma_p, k, k_p
+[ Info: Inputs:
+[ Info: Outputs: y, y2
+E'(t) = (E(t)*Ii(t)*beta_p*k_p + E(t)*I(t)*beta_I*k_p + Ii(t)^2*beta_p*k_p + Ii(t)*I(t)*beta_I*k_p + Ii(t)*int_y(t)*beta_p*gamma_p + Ii(t)*int_y(t)*beta_p*k_p - Ii(t)*C1*beta_p*k_p + I(t)*int_y(t)*beta_I*gamma_p + I(t)*int_y(t)*beta_I*k_p - I(t)*C1*beta_I*k_p)//(D(t)*k_p - C*k_p)
+Ii'(t) = E(t)*k - Ii(t)*gamma_p - Ii(t)*k_p
+I'(t) = Ii(t)*k_p - I(t)*delta - I(t)*gamma
+D'(t) = I(t)*delta
+int_y'(t) = Ii(t)*k_p
+y(t) = Ii(t)*k_p
+y2(t) = int_y(t)
+
+
+julia> find_identifiable_functions(ode3)
+
+ k
+ C1*k_p
+ gamma_p + k_p
+ delta + gamma
+ delta//beta_I
+ delta//(C1*beta_p)
+
+julia> find_identifiable_functions(ode3,with_states=true)
+
+ int_y(t)
+ I(t)
+ k
+ Ii(t)*k_p
+ E(t)*k_p
+ C1*k_p
+ gamma_p + k_p
+ delta + gamma
+ delta//beta_I
+ delta//(Ii(t)*beta_p)
+ -delta//(D(t) - C)
+
+julia>  assess_identifiability(ode3)
+  E(t)     => :nonidentifiable
+  Ii(t)    => :nonidentifiable
+  I(t)     => :globally
+  D(t)     => :nonidentifiable
+  int_y(t) => :globally
+  C        => :nonidentifiable
+  C1       => :nonidentifiable
+  beta_I   => :nonidentifiable
+  beta_p   => :nonidentifiable
+  delta    => :nonidentifiable
+  gamma    => :nonidentifiable
+  gamma_p  => :nonidentifiable
+  k        => :globally
+  k_p      => :nonidentifiable
+
+
+
+julia> assess_identifiability(ode3, known_ic = [E,Ii,I,D])
+  E(0)     => :globally
+  Ii(0)    => :globally
+  I(0)     => :globally
+  D(0)     => :globally
+  int_y(0) => :globally
+  C        => :nonidentifiable
+  C1       => :globally
+  beta_I   => :nonidentifiable
+  beta_p   => :nonidentifiable
+  delta    => :nonidentifiable
+  gamma    => :nonidentifiable
+  gamma_p  => :globally
+  k        => :globally
+  k_p      => :globally
+

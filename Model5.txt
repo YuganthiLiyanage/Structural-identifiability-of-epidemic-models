@@ -1,0 +1,102 @@
+julia> ode = @ODEmodel(
+              Sv'(t) =  lamdaupsilon - beta*Sv(t)*I(t)/n- muupsilon*Sv(t),
+              Iv'(t) = beta*Sv(t)*I(t)/n - muupsilon*Iv(t),
+              S'(t) =  -betaupsilon*Iv(t)*S(t)/n,
+              I'(t) = betaupsilon*Iv(t)*S(t)/n - gamma*I(t),
+              R'(t) = gamma*I(t),
+              y1(t) = 5-S(t)
+              )
+[ Info: Summary of the model:
+[ Info: State variables: Sv, Iv, S, I, R
+[ Info: Parameters: beta, betaupsilon, gamma, lamdaupsilon, muupsilon, n
+[ Info: Inputs:
+[ Info: Outputs: y1
+Sv'(t) = (-Sv(t)*I(t)*beta - Sv(t)*muupsilon*n + lamdaupsilon*n)//n
+Iv'(t) = (Sv(t)*I(t)*beta - Iv(t)*muupsilon*n)//n
+S'(t) = (-Iv(t)*S(t)*betaupsilon)//n
+I'(t) = (Iv(t)*S(t)*betaupsilon - I(t)*gamma*n)//n
+R'(t) = I(t)*gamma
+y1(t) = -S(t) + 5
+
+
+julia>  assess_identifiability(ode)
+
+  Sv(t)        => :nonidentifiable
+  Iv(t)        => :nonidentifiable
+  S(t)         => :globally
+  I(t)         => :globally
+  R(t)         => :nonidentifiable
+  beta         => :nonidentifiable
+  betaupsilon  => :nonidentifiable
+  gamma        => :globally
+  lamdaupsilon => :nonidentifiable
+  muupsilon    => :globally
+  n            => :nonidentifiable
+
+julia> find_identifiable_functions(ode)
+ muupsilon
+ gamma
+ n//beta
+ n//(betaupsilon*lamdaupsilon)
+
+julia> assess_identifiability(ode, known_ic = [Sv,Iv,S,I,R])
+  Sv(0)        => :globally
+  Iv(0)        => :globally
+  S(0)         => :globally
+  I(0)         => :globally
+  R(0)         => :globally
+  beta         => :nonidentifiable
+  betaupsilon  => :nonidentifiable
+  gamma        => :globally
+  lamdaupsilon => :globally
+  muupsilon    => :globally
+  n            => :nonidentifiable
+
+julia> ode = @ODEmodel(
+              Sv'(t) =  lamdaupsilon - beta*Sv(t)*I(t)/n- muupsilon*Sv(t),
+              Iv'(t) = beta*Sv(t)*I(t)/n - muupsilon*Iv(t),
+              S'(t) =  -betaupsilon*Iv(t)*S(t)/n,
+              I'(t) = betaupsilon*Iv(t)*S(t)/n - gamma*I(t),
+              R'(t) = gamma*I(t),
+              y1(t) = 5-S(t),
+              y2(t) = n
+              )
+[ Info: Summary of the model:
+[ Info: State variables: Sv, Iv, S, I, R
+[ Info: Parameters: beta, betaupsilon, gamma, lamdaupsilon, muupsilon, n
+[ Info: Inputs:
+[ Info: Outputs: y1, y2
+Sv'(t) = (-Sv(t)*I(t)*beta - Sv(t)*muupsilon*n + lamdaupsilon*n)//n
+Iv'(t) = (Sv(t)*I(t)*beta - Iv(t)*muupsilon*n)//n
+S'(t) = (-Iv(t)*S(t)*betaupsilon)//n
+I'(t) = (Iv(t)*S(t)*betaupsilon - I(t)*gamma*n)//n
+R'(t) = I(t)*gamma
+y1(t) = -S(t) + 5
+y2(t) = n
+
+
+julia>  assess_identifiability(ode)
+  Sv(t)        => :nonidentifiable
+  Iv(t)        => :nonidentifiable
+  S(t)         => :globally
+  I(t)         => :globally
+  R(t)         => :nonidentifiable
+  beta         => :globally
+  betaupsilon  => :nonidentifiable
+  gamma        => :globally
+  lamdaupsilon => :nonidentifiable
+  muupsilon    => :globally
+  n            => :globally
+
+julia> assess_identifiability(ode, known_ic = [Sv,Iv,S,I,R])
+  Sv(0)        => :globally
+  Iv(0)        => :globally
+  S(0)         => :globally
+  I(0)         => :globally
+  R(0)         => :globally
+  beta         => :globally
+  betaupsilon  => :globally
+  gamma        => :globally
+  lamdaupsilon => :globally
+  muupsilon    => :globally
+  n            => :globally

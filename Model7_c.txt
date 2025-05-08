@@ -1,0 +1,81 @@
+
+julia> using StructuralIdentifiability
+
+julia> ode4 = @ODEmodel(
+         E'(t) = (bI * I(t) + bH * H(t) + bD * D(t)) * (C2 - E(t) - (I(t) + (a + gI + dI) / (dH * a + (gH + dH) * dI) * (dH * H(t) + (gH + dH) * D(t)) - C3)) / (C - D(t)) - k * E(t),
+         I'(t) = k * E(t) - (a + gI + dI) * I(t),
+         H'(t) = a * I(t) - (gH + dH) * H(t),
+         D'(t) = dI * I(t) + dH * H(t),
+         y(t) = k * E(t),
+         y2(t) = I(t) + (a + gI + dI) / (dH * a + (gH + dH) * dI) * (dH * H(t) + (gH + dH) * D(t)) - C3,
+         y3(t) = a*I(t),
+         y4(t) = dI*I(t)+dH*H(t)
+         )
+
+[ Info: Summary of the model:
+[ Info: State variables: E, I, H, D
+[ Info: Parameters: C, C2, C3, a, bD, bH, bI, dH, dI, gH, gI, k
+[ Info: Inputs:
+[ Info: Outputs: y, y2, y3, y4
+E'(t) = (E(t)*I(t)*a*bI*dH + E(t)*I(t)*bI*dH*dI + E(t)*I(t)*bI*dI*gH + E(t)*H(t)*a*bH*dH + E(t)*H(t)*bH*dH*dI + E(t)*H(t)*bH*dI*gH + E(t)*D(t)*a*bD*dH - E(t)*D(t)*a*dH*k + E(t)*D(t)*bD*dH*dI + E(t)*D(t)*bD*dI*gH - E(t)*D(t)*dH*dI*k - E(t)*D(t)*dI*gH*k + E(t)*C*a*dH*k + E(t)*C*dH*dI*k + E(t)*C*dI*gH*k + I(t)^2*a*bI*dH + I(t)^2*bI*dH*dI + I(t)^2*bI*dI*gH + I(t)*H(t)*a*bH*dH + I(t)*H(t)*a*bI*dH + I(t)*H(t)*bH*dH*dI + I(t)*H(t)*bH*dI*gH + I(t)*H(t)*bI*dH*dI + I(t)*H(t)*bI*dH*gI + I(t)*D(t)*a*bD*dH + I(t)*D(t)*a*bI*dH + I(t)*D(t)*a*bI*gH + I(t)*D(t)*bD*dH*dI + I(t)*D(t)*bD*dI*gH + I(t)*D(t)*bI*dH*dI + I(t)*D(t)*bI*dH*gI + I(t)*D(t)*bI*dI*gH + I(t)*D(t)*bI*gH*gI - I(t)*C2*a*bI*dH - I(t)*C2*bI*dH*dI - I(t)*C2*bI*dI*gH - I(t)*C3*a*bI*dH - I(t)*C3*bI*dH*dI - I(t)*C3*bI*dI*gH + H(t)^2*a*bH*dH + H(t)^2*bH*dH*dI + H(t)^2*bH*dH*gI + H(t)*D(t)*a*bD*dH + H(t)*D(t)*a*bH*dH + H(t)*D(t)*a*bH*gH + H(t)*D(t)*bD*dH*dI + H(t)*D(t)*bD*dH*gI + H(t)*D(t)*bH*dH*dI + H(t)*D(t)*bH*dH*gI + H(t)*D(t)*bH*dI*gH + H(t)*D(t)*bH*gH*gI - H(t)*C2*a*bH*dH - H(t)*C2*bH*dH*dI - H(t)*C2*bH*dI*gH - H(t)*C3*a*bH*dH - H(t)*C3*bH*dH*dI - H(t)*C3*bH*dI*gH + D(t)^2*a*bD*dH + D(t)^2*a*bD*gH + D(t)^2*bD*dH*dI + D(t)^2*bD*dH*gI + D(t)^2*bD*dI*gH + D(t)^2*bD*gH*gI - D(t)*C2*a*bD*dH - D(t)*C2*bD*dH*dI - D(t)*C2*bD*dI*gH - D(t)*C3*a*bD*dH - D(t)*C3*bD*dH*dI - D(t)*C3*bD*dI*gH)//(D(t)*a*dH + D(t)*dH*dI + D(t)*dI*gH - C*a*dH - C*dH*dI - C*dI*gH)
+I'(t) = E(t)*k - I(t)*a - I(t)*dI - I(t)*gI
+H'(t) = I(t)*a - H(t)*dH - H(t)*gH
+D'(t) = I(t)*dI + H(t)*dH
+y(t) = E(t)*k
+y2(t) = (I(t)*a*dH + I(t)*dH*dI + I(t)*dI*gH + H(t)*a*dH + H(t)*dH*dI + H(t)*dH*gI + D(t)*a*dH + D(t)*a*gH + D(t)*dH*dI + D(t)*dH*gI + D(t)*dI*gH + D(t)*gH*gI - C3*a*dH - C3*dH*dI - C3*dI*gH)//(a*dH + dH*dI + dI*gH)
+y3(t) = I(t)*a
+y4(t) = I(t)*dI + H(t)*dH
+
+
+julia>  assess_identifiability(ode4)
+  E(t) => :globally
+  I(t) => :globally
+  H(t) => :globally
+  D(t) => :globally
+  C    => :globally
+  C2   => :globally
+  C3   => :globally
+  a    => :globally
+  bD   => :globally
+  bH   => :globally
+  bI   => :globally
+  dH   => :globally
+  dI   => :globally
+  gH   => :globally
+  gI   => :globally
+  k    => :globally
+
+julia> find_identifiable_functions(ode4)
+ k
+ gI
+ gH
+ dI
+ dH
+ bI
+ bH
+ bD
+ a
+ C3
+ C2
+ C
+
+julia> assess_identifiability(ode4, known_ic = [E,I,H,D])
+
+  E(0) => :globally
+  I(0) => :globally
+  H(0) => :globally
+  D(0) => :globally
+  C    => :globally
+  C2   => :globally
+  C3   => :globally
+  a    => :globally
+  bD   => :globally
+  bH   => :globally
+  bI   => :globally
+  dH   => :globally
+  dI   => :globally
+  gH   => :globally
+  gI   => :globally
+  k    => :globally
+
+julia>

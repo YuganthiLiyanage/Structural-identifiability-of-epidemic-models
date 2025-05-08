@@ -1,0 +1,67 @@
+julia> using StructuralIdentifiability
+
+julia> ode = @ODEmodel(
+              S'(t) =  -(beta_p*Ii(t)+beta_I*I(t))*S(t)/(S(t)+E(t)+Ii(t)+I(t)+R(t)),
+              E'(t) = (beta_p*Ii(t)+beta_I*I(t))*S(t)/(S(t)+E(t)+Ii(t)+I(t)+R(t))-(k*E(t)),
+              Ii'(t) = k*E(t)-k_p*Ii(t)-gamma_p*Ii(t),
+              I'(t) =  k_p*Ii(t) - gamma*I(t)-delta*I(t),
+              R'(t) = gamma*I(t) + gamma_p*Ii(t),
+              D'(t) = delta*I(t),
+              y1(t) = k_p*Ii(t),
+              y2(t) = delta*I(t)
+              )
+[ Info: Summary of the model:
+[ Info: State variables: S, E, Ii, I, R, D
+[ Info: Parameters: beta_I, beta_p, delta, gamma, gamma_p, k, k_p
+[ Info: Inputs:
+[ Info: Outputs: y1, y2
+S'(t) = (-S(t)*Ii(t)*beta_p - S(t)*I(t)*beta_I)//(S(t) + E(t) + Ii(t) + I(t) + R(t))
+E'(t) = (-S(t)*E(t)*k + S(t)*Ii(t)*beta_p + S(t)*I(t)*beta_I - E(t)^2*k - E(t)*Ii(t)*k - E(t)*I(t)*k - E(t)*R(t)*k)//(S(t) + E(t) + Ii(t) + I(t) + R(t))
+Ii'(t) = E(t)*k - Ii(t)*gamma_p - Ii(t)*k_p
+I'(t) = Ii(t)*k_p - I(t)*delta - I(t)*gamma
+R'(t) = Ii(t)*gamma_p + I(t)*gamma
+D'(t) = I(t)*delta
+y1(t) = Ii(t)*k_p
+y2(t) = I(t)*delta
+
+
+julia>  assess_identifiability(ode)
+  S(t)    => :nonidentifiable
+  E(t)    => :nonidentifiable
+  Ii(t)   => :nonidentifiable
+  I(t)    => :globally
+  R(t)    => :nonidentifiable
+  D(t)    => :nonidentifiable
+  beta_I  => :globally
+  beta_p  => :nonidentifiable
+  delta   => :globally
+  gamma   => :globally
+  gamma_p => :nonidentifiable
+  k       => :locally
+  k_p     => :nonidentifiable
+
+julia> find_identifiable_functions(ode)
+
+ gamma
+ delta
+ beta_I
+ gamma_p*k + k*k_p
+ gamma_p + k + k_p
+ k_p//beta_p
+
+julia> assess_identifiability(ode, known_ic = [S,E,Ii,I,R,D])
+  S(0)    => :globally
+  E(0)    => :globally
+  Ii(0)   => :globally
+  I(0)    => :globally
+  R(0)    => :globally
+  D(0)    => :globally
+  beta_I  => :globally
+  beta_p  => :globally
+  delta   => :globally
+  gamma   => :globally
+  gamma_p => :globally
+  k       => :globally
+  k_p     => :globally
+
+julia>
