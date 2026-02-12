@@ -1,0 +1,94 @@
+ -------------------------------- 
+ >>> STRIKE-GOLDD toolbox 4.3.0 
+ -------------------------------- 
+
+ Analyzing the M7 model with the FISPO algorithm...
+
+ >>> The model contains:
+ 4 states:
+ [x1; x2; x3; x4]
+ 4 outputs:
+ [conj(k)*conj(x1); conj(x2) - conj(C3) + ((conj(deltaH)*conj(x3) + conj(x4)*(conj(deltaH) + conj(gammaH)))*(conj(alpha) + conj(deltaI) + conj(gammaI)))/(conj(deltaI)*(conj(deltaH) + conj(gammaH)) + conj(alpha)*conj(deltaH)); conj(alpha)*conj(x2); conj(deltaH)*conj(x3) + conj(deltaI)*conj(x2)]
+ 0 known inputs:
+ 
+ 0 unknown inputs:
+ 
+ 12 parameters:
+ [betaI; betaH; betaD; k; alpha; gammaI; deltaI; gammaH; deltaH; C; C2; C3]
+
+ >>> Building the observability-identifiability matrix requires at least 3 Lie derivatives
+     Calculating derivatives: 1 2 3 
+ >>> Observability-Identifiability matrix built with 3 Lie derivatives
+     (calculated in 1.600202e-01 seconds)
+ >>> Calculating rank...
+     Rank = 13 (calculated in 8.515848e-01 seconds)
+ >>> Observability-Identifiability matrix built with 4 Lie derivatives
+     (calculated in 9.748850e-01 seconds)
+ >>> Calculating rank...
+     Rank = 14 (calculated in 1.700188e+00 seconds)
+ >>> Observability-Identifiability matrix built with 5 Lie derivatives
+     (calculated in 2.947426e+00 seconds)
+ >>> Calculating rank...
+     Rank = 15 (calculated in 8.591201e+00 seconds)
+ >>> Observability-Identifiability matrix built with 6 Lie derivatives
+     (calculated in 1.134176e+01 seconds)
+ >>> Calculating rank...
+     Rank = 16 (calculated in 8.829799e+01 seconds)
+
+ ------------------------ 
+ >>> RESULTS SUMMARY:
+ ------------------------ 
+
+ >>> The model is Fully Input-State-Parameter Observable (FISPO):
+     All its states are observable.
+     All its parameters are locally structurally identifiable.
+ Total execution time: 1.185765e+02 
+
+
+
+
+ -------------------------------- 
+ >>> STRIKE-GOLDD toolbox 4.3.0 
+ -------------------------------- 
+
+ Analyzing the M7 model with the FISPO algorithm...
+
+ >>> The model contains:
+ 4 states:
+ [x1; x2; x3; x4]
+ 4 outputs:
+ [conj(k)*conj(x1); conj(x2) - conj(C3) + ((conj(deltaH)*conj(x3) + conj(x4)*(conj(deltaH) + conj(gammaH)))*(conj(alpha) + conj(deltaI) + conj(gammaI)))/(conj(deltaI)*(conj(deltaH) + conj(gammaH)) + conj(alpha)*conj(deltaH)); conj(alpha)*conj(x2); conj(deltaH)*conj(x3) + conj(deltaI)*conj(x2)]
+ 0 known inputs:
+ 
+ 0 unknown inputs:
+ 
+ 12 parameters:
+ [betaI; betaH; betaD; k; alpha; gammaI; deltaI; gammaH; deltaH; C; C2; C3]
+
+ >>> Building the observability-identifiability matrix requires at least 3 Lie derivatives
+     Calculating derivatives: 1 2 3 
+ >>> Observability-Identifiability matrix built with 3 Lie derivatives
+     (calculated in 1.962320e-01 seconds)
+ >>> Calculating rank...
+     Rank = 13 (calculated in 1.723101e-01 seconds)
+ >>> Observability-Identifiability matrix built with 4 Lie derivatives
+     (calculated in 1.036422e+00 seconds)
+ >>> Calculating rank...
+     Rank = 14 (calculated in 9.600849e-01 seconds)
+ >>> Observability-Identifiability matrix built with 5 Lie derivatives
+     (calculated in 3.126795e+00 seconds)
+ >>> Calculating rank...
+     Rank = 15 (calculated in 7.196890e+00 seconds)
+ >>> Observability-Identifiability matrix built with 6 Lie derivatives
+     (calculated in 1.292947e+01 seconds)
+ >>> Calculating rank...
+     Rank = 16 (calculated in 1.324428e+02 seconds)
+
+ ------------------------ 
+ >>> RESULTS SUMMARY:
+ ------------------------ 
+
+ >>> The model is Fully Input-State-Parameter Observable (FISPO):
+     All its states are observable.
+     All its parameters are locally structurally identifiable.
+ Total execution time: 1.664487e+02 

@@ -1,0 +1,122 @@
+  -------------------------------- 
+ >>> STRIKE-GOLDD toolbox 4.3.0 
+ -------------------------------- 
+
+ Analyzing the M4 model with the FISPO algorithm...
+
+ >>> The model contains:
+ 5 states:
+ [x1; x2; x3; x4; x5]
+ 2 outputs:
+ [conj(k)*conj(x2); conj(delta)*conj(x3)]
+ 0 known inputs:
+ 
+ 0 unknown inputs:
+ 
+ 4 parameters:
+ [beta; k; gamma; delta]
+
+ >>> Building the observability-identifiability matrix requires at least 4 Lie derivatives
+     Calculating derivatives: 1 2 3 4 
+ >>> Observability-Identifiability matrix built with 4 Lie derivatives
+     (calculated in 4.151641e-01 seconds)
+ >>> Calculating rank...
+     Rank = 8 (calculated in 5.382861e-01 seconds)
+ >>> Observability-Identifiability matrix built with 5 Lie derivatives
+     (calculated in 1.798346e+00 seconds)
+ >>> Calculating rank...
+     Rank = 8 (calculated in 1.404455e+01 seconds)
+    => Parameter beta is structurally identifiable
+    => Parameter k is structurally identifiable
+    => Parameter gamma is structurally identifiable
+    => Parameter delta is structurally identifiable
+    => State x1 is observable
+    => State x2 is observable
+    => State x3 is observable
+    => State x4 is observable
+    => State x5 is unobservable
+
+ ------------------------ 
+ >>> RESULTS SUMMARY:
+ ------------------------ 
+
+ >>> The model is structurally identifiable:
+     All its parameters are structurally identifiable.
+ >>> These states are observable (and their initial conditions, if considered unknown, are identifiable):
+      [x1, x2, x3, x4] 
+ >>> These states are unobservable (and their initial conditions, if considered unknown, are unidentifiable):
+      x5 
+ Total execution time: 3.257614e+01 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------- 
+ >>> STRIKE-GOLDD toolbox 4.3.0 
+ -------------------------------- 
+
+ Analyzing the M4 model with the FISPO algorithm...
+
+ >>> The model contains:
+ 5 states:
+ [x1; x2; x3; x4; x5]
+ 2 outputs:
+ [conj(k)*conj(x2); conj(delta)*conj(x3)]
+ 0 known inputs:
+ 
+ 0 unknown inputs:
+ 
+ 4 parameters:
+ [beta; k; gamma; delta]
+
+ >>> Building the observability-identifiability matrix requires at least 4 Lie derivatives
+     Calculating derivatives: 1 2 3 4 
+ >>> Observability-Identifiability matrix built with 4 Lie derivatives
+     (calculated in 2.354091e-01 seconds)
+ >>> Calculating rank...
+     Rank = 8 (calculated in 5.060506e-01 seconds)
+ >>> Observability-Identifiability matrix built with 5 Lie derivatives
+     (calculated in 1.260085e+00 seconds)
+ >>> Calculating rank...
+     Rank = 8 (calculated in 6.803338e+00 seconds)
+    => Parameter beta is structurally identifiable
+    => Parameter k is structurally identifiable
+    => Parameter gamma is structurally identifiable
+    => Parameter delta is structurally identifiable
+    => State x1 is observable
+    => State x2 is observable
+    => State x3 is observable
+    => State x4 is observable
+    => State x5 is unobservable
+
+ ------------------------ 
+ >>> RESULTS SUMMARY:
+ ------------------------ 
+
+ >>> The model is structurally identifiable:
+     All its parameters are structurally identifiable.
+ >>> These states are observable (and their initial conditions, if considered unknown, are identifiable):
+      [x1, x2, x3, x4] 
+ >>> These states are unobservable (and their initial conditions, if considered unknown, are unidentifiable):
+      x5 
+ Total execution time: 1.308118e+01 

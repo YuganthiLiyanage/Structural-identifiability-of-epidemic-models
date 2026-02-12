@@ -1,0 +1,130 @@
+
+
+ -------------------------------- 
+ >>> STRIKE-GOLDD toolbox 4.3.0 
+ -------------------------------- 
+
+ Analyzing the M10 model with the FISPO algorithm...
+
+ >>> The model contains:
+ 7 states:
+ [x1; x2; x3; x4; x5; x6; x7]
+ 2 outputs:
+ [k*rho*x2; alpha*x3]
+ 0 known inputs:
+ 
+ 0 unknown inputs:
+ 
+ 9 parameters:
+ [betai; betau; k; rho; gamma; alpha; gammah; delta; N]
+
+ >>> Building the observability-identifiability matrix requires at least 7 Lie derivatives
+     Calculating derivatives: 1 2 3 4 5 6 7 
+ >>> Observability-Identifiability matrix built with 7 Lie derivatives
+     (calculated in 1.464059e+00 seconds)
+ >>> Calculating rank...
+     Rank = 9 (calculated in 1.100853e+01 seconds)
+ >>> Observability-Identifiability matrix built with 8 Lie derivatives
+     (calculated in 8.152872e+00 seconds)
+ >>> Calculating rank...
+     Rank = 9 (calculated in 9.546234e+01 seconds)
+    => Parameter betai is structurally unidentifiable
+    => Parameter betau is structurally unidentifiable
+    => Parameter k is structurally identifiable
+    => Parameter rho is structurally unidentifiable
+    => Parameter gamma is structurally identifiable
+    => Parameter alpha is structurally identifiable
+    => Parameter gammah is structurally unidentifiable
+    => Parameter delta is structurally unidentifiable
+    => Parameter N is structurally unidentifiable
+    => State x1 is unobservable
+    => State x2 is unobservable
+    => State x3 is observable
+    => State x4 is unobservable
+    => State x5 is unobservable
+    => State x6 is unobservable
+    => State x7 is unobservable
+
+ ------------------------ 
+ >>> RESULTS SUMMARY:
+ ------------------------ 
+
+ >>> The model is structurally unidentifiable.
+ >>> These parameters are identifiable:
+      [alpha, gamma, k] 
+ >>> These parameters are unidentifiable:
+      [N, betai, betau, delta, gammah, rho] 
+
+ >>> These states are observable (and their initial conditions, if considered unknown, are identifiable):
+      x3 
+ >>> These states are unobservable (and their initial conditions, if considered unknown, are unidentifiable):
+      [x1, x2, x4, x5, x6, x7] 
+ Total execution time: 3.009112e+02 
+
+
+
+
+ 
+
+
+
+-------------------------------- 
+ >>> STRIKE-GOLDD toolbox 4.3.0 
+ -------------------------------- 
+
+ Analyzing the M10 model with the FISPO algorithm...
+
+ >>> The model contains:
+ 7 states:
+ [x1; x2; x3; x4; x5; x6; x7]
+ 3 outputs:
+ [k*rho*x2; alpha*x3; N]
+ 0 known inputs:
+ 
+ 0 unknown inputs:
+ 
+ 9 parameters:
+ [betai; betau; k; rho; gamma; alpha; gammah; delta; N]
+
+ >>> Building the observability-identifiability matrix requires at least 5 Lie derivatives
+     Calculating derivatives: 1 2 3 4 5 
+ >>> Observability-Identifiability matrix built with 5 Lie derivatives
+     (calculated in 2.987872e-01 seconds)
+ >>> Calculating rank...
+     Rank = 10 (calculated in 3.133605e-01 seconds)
+ >>> Observability-Identifiability matrix built with 6 Lie derivatives
+     (calculated in 5.089491e-01 seconds)
+ >>> Calculating rank...
+     Rank = 10 (calculated in 1.724134e+00 seconds)
+    => Parameter betai is structurally identifiable
+    => Parameter betau is structurally unidentifiable
+    => Parameter k is structurally identifiable
+    => Parameter rho is structurally unidentifiable
+    => Parameter gamma is structurally identifiable
+    => Parameter alpha is structurally identifiable
+    => Parameter gammah is structurally unidentifiable
+    => Parameter delta is structurally unidentifiable
+    => Parameter N is structurally identifiable
+    => State x1 is unobservable
+    => State x2 is unobservable
+    => State x3 is observable
+    => State x4 is unobservable
+    => State x5 is unobservable
+    => State x6 is unobservable
+    => State x7 is unobservable
+
+ ------------------------ 
+ >>> RESULTS SUMMARY:
+ ------------------------ 
+
+ >>> The model is structurally unidentifiable.
+ >>> These parameters are identifiable:
+      [N, alpha, betai, gamma, k] 
+ >>> These parameters are unidentifiable:
+      [betau, delta, gammah, rho] 
+
+ >>> These states are observable (and their initial conditions, if considered unknown, are identifiable):
+      x3 
+ >>> These states are unobservable (and their initial conditions, if considered unknown, are unidentifiable):
+      [x1, x2, x4, x5, x6, x7] 
+ Total execution time: 7.557378e+00 

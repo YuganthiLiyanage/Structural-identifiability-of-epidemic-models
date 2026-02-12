@@ -1,0 +1,61 @@
+
+ 
+ -------------------------------- 
+ >>> STRIKE-GOLDD toolbox 4.3.0 
+ -------------------------------- 
+
+ Analyzing the M9 model with the FISPO algorithm...
+
+ >>> The model contains:
+ 5 states:
+ [x1; x2; x3; x4; x5]
+ 2 outputs:
+ [conj(k)*conj(rho)*conj(x2); conj(N)]
+ 0 known inputs:
+ 
+ 0 unknown inputs:
+ 
+ 6 parameters:
+ [betai; betau; k; rho; gamma; N]
+
+ >>> Building the observability-identifiability matrix requires at least 5 Lie derivatives
+     Calculating derivatives: 1 2 3 4 5 
+ >>> Observability-Identifiability matrix built with 5 Lie derivatives
+     (calculated in 1.574569e-01 seconds)
+ >>> Calculating rank...
+     Rank = 7 (calculated in 2.610789e-01 seconds)
+ >>> Observability-Identifiability matrix built with 6 Lie derivatives
+     (calculated in 2.993331e-01 seconds)
+ >>> Calculating rank...
+     Rank = 8 (calculated in 1.507147e+00 seconds)
+ >>> Observability-Identifiability matrix built with 7 Lie derivatives
+     (calculated in 1.130188e+00 seconds)
+ >>> Calculating rank...
+     Rank = 8 (calculated in 1.066301e+01 seconds)
+    => Parameter betai is structurally unidentifiable
+    => Parameter betau is structurally unidentifiable
+    => Parameter k is structurally identifiable
+    => Parameter rho is structurally identifiable
+    => Parameter gamma is structurally identifiable
+    => Parameter N is structurally identifiable
+    => State x1 is observable
+    => State x2 is observable
+    => State x3 is unobservable
+    => State x4 is unobservable
+    => State x5 is unobservable
+
+ ------------------------ 
+ >>> RESULTS SUMMARY:
+ ------------------------ 
+
+ >>> The model is structurally unidentifiable.
+ >>> These parameters are identifiable:
+      [N, gamma, k, rho] 
+ >>> These parameters are unidentifiable:
+      [betai, betau] 
+
+ >>> These states are observable (and their initial conditions, if considered unknown, are identifiable):
+      [x1, x2] 
+ >>> These states are unobservable (and their initial conditions, if considered unknown, are unidentifiable):
+      [x3, x4, x5] 
+ Total execution time: 2.986206e+01 

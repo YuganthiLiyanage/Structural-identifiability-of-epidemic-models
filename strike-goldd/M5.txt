@@ -1,0 +1,65 @@
+
+
+ -------------------------------- 
+ >>> STRIKE-GOLDD toolbox 4.3.0 
+ -------------------------------- 
+
+ Analyzing the M5 model with the FISPO algorithm...
+
+ >>> The model contains:
+ 5 states:
+ [x1; x2; x3; x4; x5]
+ 2 outputs:
+ [10 - x3; n]
+ 0 known inputs:
+ 
+ 0 unknown inputs:
+ 
+ 6 parameters:
+ [lamdaupsilon; beta; muupsilon; betaupsilon; gamma; n]
+
+ >>> Building the observability-identifiability matrix requires at least 5 Lie derivatives
+     Calculating derivatives: 1 2 3 4 5 
+ >>> Observability-Identifiability matrix built with 5 Lie derivatives
+     (calculated in 2.036909e-01 seconds)
+ >>> Calculating rank...
+     Rank = 7 (calculated in 1.302795e-01 seconds)
+ >>> Observability-Identifiability matrix built with 6 Lie derivatives
+     (calculated in 3.201248e-01 seconds)
+ >>> Calculating rank...
+     Rank = 8 (calculated in 8.842469e-01 seconds)
+ >>> Observability-Identifiability matrix built with 7 Lie derivatives
+     (calculated in 8.953928e-01 seconds)
+ >>> Calculating rank...
+     Rank = 9 (calculated in 6.060952e+00 seconds)
+ >>> Observability-Identifiability matrix built with 8 Lie derivatives
+     (calculated in 9.104044e+00 seconds)
+ >>> Calculating rank...
+     Rank = 9 (calculated in 1.162755e+02 seconds)
+    => Parameter lamdaupsilon is structurally unidentifiable
+    => Parameter beta is structurally identifiable
+    => Parameter muupsilon is structurally identifiable
+    => Parameter betaupsilon is structurally unidentifiable
+    => Parameter gamma is structurally identifiable
+    => Parameter n is structurally identifiable
+    => State x1 is unobservable
+    => State x2 is unobservable
+    => State x3 is observable
+    => State x4 is observable
+    => State x5 is unobservable
+
+ ------------------------ 
+ >>> RESULTS SUMMARY:
+ ------------------------ 
+
+ >>> The model is structurally unidentifiable.
+ >>> These parameters are identifiable:
+      [beta, gamma, muupsilon, n] 
+ >>> These parameters are unidentifiable:
+      [betaupsilon, lamdaupsilon] 
+
+ >>> These states are observable (and their initial conditions, if considered unknown, are identifiable):
+      [x3, x4] 
+ >>> These states are unobservable (and their initial conditions, if considered unknown, are unidentifiable):
+      [x1, x2, x5] 
+ Total execution time: 2.288864e+02 

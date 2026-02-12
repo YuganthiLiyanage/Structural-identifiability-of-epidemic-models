@@ -1,0 +1,115 @@
+>>> STRIKE-GOLDD toolbox 4.3.0 
+ -------------------------------- 
+
+ Analyzing the M3 model with the FISPO algorithm...
+
+ >>> The model contains:
+ 4 states:
+ [x1; x2; x3; x4]
+ 1 outputs:
+ conj(k)*conj(rho1)*conj(x2)
+ 0 known inputs:
+ 
+ 0 unknown inputs:
+ 
+ 6 parameters:
+ [betaA; betaI; k; gamma; rho1; n]
+
+ >>> Building the observability-identifiability matrix requires at least 9 Lie derivatives
+     Calculating derivatives: 1 2 3 4 5 6 7 8 9 
+ >>> Observability-Identifiability matrix built with 9 Lie derivatives
+     (calculated in 1.403533e+02 seconds)
+ >>> Calculating rank...
+     Rank = 7 (calculated in 1.187362e+03 seconds)
+    => More Lie derivatives would be needed to see if the model is structurally unidentifiable as a whole.
+    However, the maximum computation time allowed for calculating each of them has been reached.
+    You can increase it by changing <<opts.maxLietime>> (currently opts.maxLietime = 100)
+    => We cannot decide about parameter betaA at the moment
+    => We cannot decide about parameter betaI at the moment
+    => Parameter k is structurally identifiable
+    => Parameter gamma is structurally identifiable
+    => Parameter rho1 is structurally identifiable
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------- 
+ >>> STRIKE-GOLDD toolbox 4.3.0 
+ -------------------------------- 
+
+ Analyzing the M3 model with the FISPO algorithm...
+
+ >>> The model contains:
+ 4 states:
+ [x1; x2; x3; x4]
+ 2 outputs:
+ [conj(k)*conj(rho1)*conj(x2); conj(n)]
+ 0 known inputs:
+ 
+ 0 unknown inputs:
+ 
+ 6 parameters:
+ [betaA; betaI; k; gamma; rho1; n]
+
+ >>> Building the observability-identifiability matrix requires at least 4 Lie derivatives
+     Calculating derivatives: 1 2 3 4 
+ >>> Observability-Identifiability matrix built with 4 Lie derivatives
+     (calculated in 1.151764e-01 seconds)
+ >>> Calculating rank...
+     Rank = 6 (calculated in 6.183250e-02 seconds)
+ >>> Observability-Identifiability matrix built with 5 Lie derivatives
+     (calculated in 3.273173e+00 seconds)
+ >>> Calculating rank...
+     Rank = 7 (calculated in 5.685092e-01 seconds)
+ >>> Observability-Identifiability matrix built with 6 Lie derivatives
+     (calculated in 8.640287e+00 seconds)
+ >>> Calculating rank...
+     Rank = 8 (calculated in 3.893235e+00 seconds)
+ >>> Observability-Identifiability matrix built with 7 Lie derivatives
+     (calculated in 1.684371e+01 seconds)
+ >>> Calculating rank...
+     Rank = 8 (calculated in 3.081535e+01 seconds)
+    => Parameter betaA is structurally unidentifiable
+    => Parameter betaI is structurally unidentifiable
+    => Parameter k is structurally identifiable
+    => Parameter gamma is structurally identifiable
+    => Parameter rho1 is structurally identifiable
+    => Parameter n is structurally identifiable
+    => State x1 is observable
+    => State x2 is observable
+    => State x3 is unobservable
+    => State x4 is unobservable
+
+ ------------------------ 
+ >>> RESULTS SUMMARY:
+ ------------------------ 
+
+ >>> The model is structurally unidentifiable.
+ >>> These parameters are identifiable:
+      [gamma, k, n, rho1] 
+ >>> These parameters are unidentifiable:
+      [betaA, betaI] 
+
+ >>> These states are observable (and their initial conditions, if considered unknown, are identifiable):
+      [x1, x2] 
+ >>> These states are unobservable (and their initial conditions, if considered unknown, are unidentifiable):
+      [x3, x4] 
+ Total execution time: 1.464715e+02 

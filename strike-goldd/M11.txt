@@ -1,0 +1,126 @@
+ -------------------------------- 
+ >>> STRIKE-GOLDD toolbox 4.3.0 
+ -------------------------------- 
+
+ Analyzing the M11 model with the FISPO algorithm...
+
+ >>> The model contains:
+ 6 states:
+ [x1; x2; x3; x4; x5; x6]
+ 2 outputs:
+ [conj(k)*conj(x2); conj(k)*conj(x4)]
+ 0 known inputs:
+ 
+ 0 unknown inputs:
+ 
+ 5 parameters:
+ [alpha; beta; k; gamma; N]
+
+ >>> Building the observability-identifiability matrix requires at least 5 Lie derivatives
+     Calculating derivatives: 1 2 3 4 5 
+ >>> Observability-Identifiability matrix built with 5 Lie derivatives
+     (calculated in 1.910062e-01 seconds)
+ >>> Calculating rank...
+     Rank = 7 (calculated in 4.760480e-02 seconds)
+ >>> Observability-Identifiability matrix built with 6 Lie derivatives
+     (calculated in 2.191004e-01 seconds)
+ >>> Calculating rank...
+     Rank = 7 (calculated in 6.358860e-02 seconds)
+    => Parameter alpha is structurally identifiable
+    => Parameter beta is structurally unidentifiable
+    => Parameter k is structurally identifiable
+    => Parameter gamma is structurally identifiable
+    => Parameter N is structurally unidentifiable
+    => State x1 is unobservable
+    => State x2 is observable
+    => State x3 is unobservable
+    => State x4 is observable
+    => State x5 is unobservable
+    => State x6 is unobservable
+
+ ------------------------ 
+ >>> RESULTS SUMMARY:
+ ------------------------ 
+
+ >>> The model is structurally unidentifiable.
+ >>> These parameters are identifiable:
+      [alpha, gamma, k] 
+ >>> These parameters are unidentifiable:
+      [N, beta] 
+
+ >>> These states are observable (and their initial conditions, if considered unknown, are identifiable):
+      [x2, x4] 
+ >>> These states are unobservable (and their initial conditions, if considered unknown, are unidentifiable):
+      [x1, x3, x5, x6] 
+ Total execution time: 1.343928e+00 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -------------------------------- 
+ >>> STRIKE-GOLDD toolbox 4.3.0 
+ -------------------------------- 
+
+ Analyzing the M11 model with the FISPO algorithm...
+
+ >>> The model contains:
+ 6 states:
+ [x1; x2; x3; x4; x5; x6]
+ 3 outputs:
+ [conj(k)*conj(x2); conj(k)*conj(x4); conj(N)]
+ 0 known inputs:
+ 
+ 0 unknown inputs:
+ 
+ 5 parameters:
+ [alpha; beta; k; gamma; N]
+
+ >>> Building the observability-identifiability matrix requires at least 3 Lie derivatives
+     Calculating derivatives: 1 2 3 
+ >>> Observability-Identifiability matrix built with 3 Lie derivatives
+     (calculated in 1.275412e-01 seconds)
+ >>> Calculating rank...
+     Rank = 8 (calculated in 2.348880e-02 seconds)
+ >>> Observability-Identifiability matrix built with 4 Lie derivatives
+     (calculated in 1.604365e-01 seconds)
+ >>> Calculating rank...
+     Rank = 8 (calculated in 1.640070e-02 seconds)
+    => Parameter alpha is structurally identifiable
+    => Parameter beta is structurally identifiable
+    => Parameter k is structurally identifiable
+    => Parameter gamma is structurally identifiable
+    => Parameter N is structurally identifiable
+    => State x1 is unobservable
+    => State x2 is observable
+    => State x3 is unobservable
+    => State x4 is observable
+    => State x5 is unobservable
+    => State x6 is unobservable
+
+ ------------------------ 
+ >>> RESULTS SUMMARY:
+ ------------------------ 
+
+ >>> The model is structurally identifiable:
+     All its parameters are structurally identifiable.
+ >>> These states are observable (and their initial conditions, if considered unknown, are identifiable):
+      [x2, x4] 
+ >>> These states are unobservable (and their initial conditions, if considered unknown, are unidentifiable):
+      [x1, x3, x5, x6] 
+ Total execution time: 1.047832e+00 
