@@ -1,0 +1,24 @@
+=========================== Input system ===============================
+
+[diff(x1(t),t) = -x1(t)*(betai*x3(t)+betau*x4(t))/N, diff(x2(t),t) = -k*x2(t)+x1(t)*(betai*x3(t)+betau*x4(t))/N, diff(x3(t),t) = k*rho*x2(t)-gamma1*x3(t), diff(x4(t),t) = k*(1-rho)*x2(t)-gamma1*x4(t), diff(x5(t),t) = gamma1*x3(t)+gamma1*x4(t), y1(t) = k*rho*x2(t)]
+
+
+=========================== SIAN Output ================================
+
+Globally identifiable parameters:                  [gamma1, k]
+Locally but not globally identifiable parameters:  []
+Not identifiable parameters:                       [N, betai, betau, rho, x1(0), x2(0), x3(0), x4(0), x5(0)]
+
+
+
+=========================== Input system ===============================
+
+[diff(x1(t),t) = -x1(t)*(betai*x3(t)+betau*x4(t))/N, diff(x2(t),t) = -k*x2(t)+x1(t)*(betai*x3(t)+betau*x4(t))/N, diff(x3(t),t) = k*rho*x2(t)-gamma1*x3(t), diff(x4(t),t) = k*(1-rho)*x2(t)-gamma1*x4(t), diff(x5(t),t) = gamma1*x3(t)+gamma1*x4(t), y1(t) = k*rho*x2(t), y2(t) = N]
+
+
+=========================== SIAN Output ================================
+
+Globally identifiable parameters:                  [N, gamma1, k]
+Locally but not globally identifiable parameters:  []
+Not identifiable parameters:                       [betai, betau, rho, x1(0), x2(0), x3(0), x4(0), x5(0)]
+

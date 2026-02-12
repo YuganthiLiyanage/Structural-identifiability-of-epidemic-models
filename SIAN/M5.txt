@@ -1,0 +1,23 @@
+=========================== Input system ===============================
+
+[diff(x1(t),t) = lamdaupsilon-beta*x1(t)*x5(t)/n-muupsilon*x1(t), diff(x2(t),t) = beta*x1(t)*x5(t)/n-muupsilon*x2(t), diff(x3(t),t) = -betaupsilon*x2(t)*x3(t)/n, diff(x5(t),t) = betaupsilon*x2(t)*x3(t)/n-gamma1*x5(t), diff(x6(t),t) = gamma1*x5(t), y1(t) = 5-x3(t)]
+
+
+=========================== SIAN Output ================================
+
+Globally identifiable parameters:                  [gamma1, muupsilon, x3(0), x5(0)]
+Locally but not globally identifiable parameters:  []
+Not identifiable parameters:                       [beta, n, betaupsilon, lamdaupsilon, x1(0), x2(0), x6(0)]
+
+
+=========================== Input system ===============================
+
+[diff(x1(t),t) = lamdaupsilon-beta*x1(t)*x5(t)/n-muupsilon*x1(t), diff(x2(t),t) = beta*x1(t)*x5(t)/n-muupsilon*x2(t), diff(x3(t),t) = -betaupsilon*x2(t)*x3(t)/n, diff(x5(t),t) = betaupsilon*x2(t)*x3(t)/n-gamma1*x5(t), diff(x6(t),t) = gamma1*x5(t), y1(t) = 5-x3(t), y2(t) = n]
+
+
+=========================== SIAN Output ================================
+
+Globally identifiable parameters:                  [beta, gamma1, n, muupsilon, x3(0), x5(0)]
+Locally but not globally identifiable parameters:  []
+Not identifiable parameters:                       [betaupsilon, lamdaupsilon, x1(0), x2(0), x6(0)]
+

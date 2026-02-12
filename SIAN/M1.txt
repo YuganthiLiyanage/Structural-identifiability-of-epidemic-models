@@ -1,0 +1,36 @@
+=========================== Input system ===============================
+
+[diff(x1(t),t) = -beta*x1(t)*x3(t)/n, diff(x2(t),t) = beta*x1(t)*x3(t)/n-k*x2(t), diff(x3(t),t) = -gamma1*x3(t)+k*x2(t), diff(x4(t),t) = gamma1*x3(t), y1(t) = k*x2(t)]
+
+
+=========================== SIAN Output ================================
+
+Globally identifiable parameters:                  [gamma1, k, x1(0), x2(0), x3(0)]
+Locally but not globally identifiable parameters:  []
+Not identifiable parameters:                       [beta, n, x4(0)]
+
+
+============ Single and/or Multi-Experiment Identifiability ============
+
+Multi experiment identifiable combinations:        [gamma1, k, beta/n]
+With bound:                                        1
+Single experiment identifiable combinations:       [gamma1, k, beta/n]
+
+
+=========================== Input system ===============================
+
+[diff(x1(t),t) = -beta*x1(t)*x3(t)/n, diff(x2(t),t) = beta*x1(t)*x3(t)/n-k*x2(t), diff(x3(t),t) = -gamma1*x3(t)+k*x2(t), diff(x4(t),t) = gamma1*x3(t), y1(t) = k*x2(t), y2(t) = n]
+
+
+=========================== SIAN Output ================================
+
+Globally identifiable parameters:                  [beta, gamma1, k, n, x1(0), x2(0), x3(0)]
+Locally but not globally identifiable parameters:  []
+Not identifiable parameters:                       [x4(0)]
+
+
+============ Single and/or Multi-Experiment Identifiability ============
+
+Multi experiment identifiable combinations:        [beta, gamma1, k, n]
+With bound:                                        1
+Single experiment identifiable combinations:       [beta, gamma1, k, n]

@@ -1,0 +1,23 @@
+=========================== Input system ===============================
+
+[diff(x1(t),t) = -x1(t)*(betai*x3(t)+betau*x4(t))/N, diff(x2(t),t) = -k*x2(t)+x1(t)*(betai*x3(t)+betau*x4(t))/N, diff(x3(t),t) = k*rho*x2(t)-(gamma1+alpha)*x3(t), diff(x4(t),t) = k*(1-rho)*x2(t)-gamma1*x4(t), diff(x5(t),t) = alpha*x3(t)-gammah*x5(t)-delta*x5(t), diff(x6(t),t) = delta*x5(t), diff(x7(t),t) = gamma1*x3(t)+gamma1*x4(t)+gammah*x5(t), y1(t) = k*rho*x2(t), y2(t) = alpha*x3(t)]
+
+
+=========================== SIAN Output ================================
+
+Globally identifiable parameters:                  [alpha, gamma1, k, x3(0)]
+Locally but not globally identifiable parameters:  []
+Not identifiable parameters:                       [N, betai, betau, delta, gammah, rho, x1(0), x2(0), x4(0), x5(0), x6(0), x7(0)]
+
+
+
+=========================== Input system ===============================
+
+[diff(x1(t),t) = -x1(t)*(betai*x3(t)+betau*x4(t))/N, diff(x2(t),t) = -k*x2(t)+x1(t)*(betai*x3(t)+betau*x4(t))/N, diff(x3(t),t) = k*rho*x2(t)-(gamma1+alpha)*x3(t), diff(x4(t),t) = k*(1-rho)*x2(t)-gamma1*x4(t), diff(x5(t),t) = alpha*x3(t)-gammah*x5(t)-delta*x5(t), diff(x6(t),t) = delta*x5(t), diff(x7(t),t) = gamma1*x3(t)+gamma1*x4(t)+gammah*x5(t), y1(t) = k*rho*x2(t), y2(t) = alpha*x3(t), y3(t) = N]
+
+
+=========================== SIAN Output ================================
+
+Globally identifiable parameters:                  [N, alpha, betai, gamma1, k, x3(0)]
+Locally but not globally identifiable parameters:  []
+Not identifiable parameters:                       [betau, delta, gammah, rho, x1(0), x2(0), x4(0), x5(0), x6(0), x7(0)]

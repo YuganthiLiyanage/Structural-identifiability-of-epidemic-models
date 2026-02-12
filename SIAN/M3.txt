@@ -1,0 +1,17 @@
+=========================== Input system ===============================
+
+[diff(x1(t),t) = -(betaA*x4(t)+betaI*x3(t))*x1(t)/n, diff(x2(t),t) = (betaA*x4(t)+betaI*x3(t))*x1(t)/n-k*x2(t), diff(x3(t),t) = k*rho*x2(t)-ga*x3(t), diff(x4(t),t) = k*(1-rho)*x2(t)-ga*x4(t), diff(x5(t),t) = ga*x3(t)+ga*x4(t), y1(t) = k*rho*x2(t)]
+
+
+=========================== SIAN Output ================================
+
+Globally identifiable parameters:                  [ga, k]
+Locally but not globally identifiable parameters:  []
+Not identifiable parameters:                       [betaA, betaI, n, rho, x1(0), x2(0), x3(0), x4(0), x5(0)]
+
+
+============ Single and/or Multi-Experiment Identifiability ============
+
+Multi experiment identifiable combinations:        [ga, k, n*rho/(betaA*rho-betaI*rho-betaA)]
+With bound:                                        1
+Single experiment identifiable combinations:       [ga, k, n*rho/(betaA*rho-betaI*rho-betaA)]

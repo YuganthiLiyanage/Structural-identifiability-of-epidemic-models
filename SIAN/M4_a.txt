@@ -1,0 +1,103 @@
+Using text-based input format:
+
+[diff(x1(t),t) = -beta*x1(t)*x3(t)/(x1(t)+x2(t)+x3(t)+x4(t)), diff(x2(t),t) = beta*x1(t)*x3(t)/(x1(t)+x2(t)+x3(t)+x4(t))-k*x2(t), diff(x3(t),t) = k*x2(t)-(gamma1+delta1)*x3(t), diff(x4(t),t) = gamma1*x3(t), diff(x5(t),t) = delta1*x3(t), y1(t) = k*x2(t)] 
+
+
+=======================================================
+
+0. Extracting states, inputs, outputs, and parameters from the system
+
+=======================================================
+
+
+===== Input info =====
+
+State variables:          [x1(t), x2(t), x3(t), x4(t), x5(t)]
+
+Output variables:         [y1(t)]
+
+Input variables:          []
+
+Parameters in equations:  [beta, delta1, gamma1, k]
+
+===================
+
+
+
+=======================================================
+
+1. Constructing the maximal polynomial system
+
+=======================================================
+
+
+=======================================================
+
+2. Truncating the polynomial system based on the Jacobian condition
+
+=======================================================
+
+
+=======================================================
+
+3. Assessing local identifiability
+
+=======================================================
+
+
+=======================================================
+
+4. Randomizing the truncated system
+
+=======================================================
+
+
+=======================================================
+
+5. Assessing global identifiability
+
+=======================================================
+
+Computing Groebner Basis with characteristic 0
+
+The number of solutions for k, is 1
+
+The number of solutions for x1_0, is 1
+
+The number of solutions for x2_0, is 1
+
+The number of solutions for x3_0, is 1
+
+
+=== Summary ===
+
+Globally identifiable parameters:                  [k, x1(0), x2(0), x3(0)]
+
+Locally but not globally identifiable parameters:  []
+
+Not identifiable parameters:                       [beta, delta1, gamma1, x4(0), x5(0)]
+
+===============
+
+
+
+=======================================================
+
+WARNING: The result of solution counting is guaranteed with high probability, however it NOT the same probability 'p' as provided in the input.
+
+=======================================================
+
+
+
+
+
+=========================== Input system ===============================
+
+[diff(x1(t),t) = -beta*x1(t)*x3(t)/(x1(t)+x2(t)+x3(t)+x4(t)), diff(x2(t),t) = beta*x1(t)*x3(t)/(x1(t)+x2(t)+x3(t)+x4(t))-k*x2(t), diff(x3(t),t) = k*x2(t)-(gamma1+delta1)*x3(t), diff(x4(t),t) = gamma1*x3(t), diff(x5(t),t) = delta1*x3(t), y1(t) = k*x2(t)]
+
+
+=========================== SIAN Output ================================
+
+Globally identifiable parameters:                  [k, x1(0), x2(0), x3(0)]
+Locally but not globally identifiable parameters:  []
+Not identifiable parameters:                       [beta, delta1, gamma1, x4(0), x5(0)]
